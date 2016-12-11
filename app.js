@@ -6,7 +6,7 @@ const request = require('request')
 const thingSpeakApiKey = process.env.thingSpeakApiKey
 
 const app = express()
-app.listen(process.env.Port || 3000, process.env.HOST || '0.0.0.0')
+app.listen(process.env.PORT || 3000, process.env.HOST || '0.0.0.0')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
