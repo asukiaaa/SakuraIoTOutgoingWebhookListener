@@ -33,7 +33,7 @@ const postToThingSpeak = (channels) => {
   const batteryVolt = valueFromChannels(channels, 2)
   const chargeWatt = valueFromChannels(channels, 3)
 
-  request({
+  let requestOptions = {
     method: 'post',
     url: 'https://api.thingspeak.com/update.json',
     // url: 'https://asuki.webscript.io/sakura',
@@ -43,13 +43,17 @@ const postToThingSpeak = (channels) => {
       field2: chargeAmp,
       field3: batteryVolt,
       field4: chargeWatt
-    }}, (err, response, body) => {
-      console.log('sent to server')
-      if (err) {
-        console.log('err')
-        console.log('body', body)
-      }
-    })
+    }}
+
+  console.log(requestOptions)
+
+  request(requestOptions, (err, response, body) => {
+    console.log('sent to server')
+    if (err) {
+      console.log('err')
+      console.log('body', body)
+    }
+  })
 }
 
 const valueFromChannels = (channels, channel) => {
