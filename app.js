@@ -38,7 +38,7 @@ const postToThingSpeak = (channels) => {
     url: 'https://api.thingspeak.com/update.json',
     // url: 'https://asuki.webscript.io/sakura',
     json: {
-      api_key: process.env.thingspeakApiKey,
+      api_key: thingSpeakApiKey,
       field1: panelVolt,
       field2: chargeAmp,
       field3: batteryVolt,
