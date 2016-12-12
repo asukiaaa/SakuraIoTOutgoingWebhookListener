@@ -4,12 +4,16 @@ const bodyParser = require('body-parser')
 const request = require('request')
 
 const app = express()
+
+app.set('view engine', 'pug')
+app.enable('view cache')
+
 app.listen(process.env.PORT || 3000, process.env.HOST || '0.0.0.0')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.send('hello')
+  res.render('index')
 })
 
 app.post('/sakura_outgoing', bodyParser.json(), (req, res) => {
