@@ -3,8 +3,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 
-const thingSpeakApiKey = process.env.thingSpeakApiKey
-
 const app = express()
 app.listen(process.env.PORT || 3000, process.env.HOST || '0.0.0.0')
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -27,7 +25,13 @@ app.post('/sakura_outgoing', bodyParser.json(), (req, res) => {
   }
 })
 
+
 const postToThingSpeak = (channels) => {
+  const thingSpeakApiKey = process.env.thingSpeakApiKey || null
+  if (thingSpeakApiKey == null) {
+    console.log("thingSpeakApiKey is blank")
+    return
+  }
   const panelVolt = valueFromChannels(channels, 0)
   const chargeAmp = valueFromChannels(channels, 1)
   const batteryVolt = valueFromChannels(channels, 2)
@@ -36,7 +40,6 @@ const postToThingSpeak = (channels) => {
   let requestOptions = {
     method: 'post',
     url: 'https://api.thingspeak.com/update.json',
-    // url: 'https://asuki.webscript.io/sakura',
     json: {
       api_key: thingSpeakApiKey,
       field1: panelVolt,
