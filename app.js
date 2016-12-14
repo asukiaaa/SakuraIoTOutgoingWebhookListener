@@ -44,10 +44,10 @@ const postToThingSpeak = (channels) => {
   console.log('post to ThingSpeak')
 
   let jsonToPost = {api_key: thingSpeakApiKey}
-  for (let i = 0; i <= 8; i++) {
+  for (let i = 0; i < 8; i++) {
     let channelValue = valueFromChannels(channels, i)
     if (channelValue) {
-      jsonToPost["field" + i] = channelValue
+      jsonToPost["field" + (i+1)] = channelValue
     }
   }
 
