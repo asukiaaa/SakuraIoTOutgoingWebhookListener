@@ -5,6 +5,8 @@ const request = require('request')
 
 const app = express()
 
+let channelsHistory = []
+
 app.set('view engine', 'pug')
 app.enable('view cache')
 
@@ -13,14 +15,19 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('index', {channelsHistory})
 })
 
 app.post('/sakura_outgoing', bodyParser.json(), (req, res) => {
   if (req.body.payload &&
       req.body.payload.channels) {
     const channels = req.body.payload.channels
-    console.log(channels)
+
+    channelsHistory.unshift(channels)
+    if (channelsHistory.length > 10) {
+      channelsHistory.pop()
+    }
+
     postToThingSpeak(channels)
     res.send('OK')
   } else {
@@ -33,7 +40,6 @@ app.post('/sakura_outgoing', bodyParser.json(), (req, res) => {
 const postToThingSpeak = (channels) => {
   const thingSpeakApiKey = process.env.thingSpeakApiKey || null
   if (thingSpeakApiKey == null) {
-    console.log("thingSpeakApiKey is blank")
     return
   }
   const panelVolt = valueFromChannels(channels, 0)
@@ -52,12 +58,9 @@ const postToThingSpeak = (channels) => {
       field4: chargeWatt
     }}
 
-  console.log(requestOptions)
-
   request(requestOptions, (err, response, body) => {
-    console.log('sent to server')
     if (err) {
-      console.log('err')
+      console.log('Error at posting to ThingSpeak')
       console.log('body', body)
     }
   })

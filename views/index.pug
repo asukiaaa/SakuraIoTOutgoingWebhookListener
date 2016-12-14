@@ -1,1 +1,20 @@
-h1 hello!
+h1 Channels History
+p From sakura Iot platform outgoing webhook.
+if channelsHistory.length == 0
+  p No channels history
+else
+  table
+    thead
+      th channel
+      th type
+      th value
+      th datetime
+    tbody
+      for channels in channelsHistory
+        for channel in channels
+          tr
+            td= channel.channel
+            td= channel.type
+            td= channel.value
+            td= channel.datetime
+

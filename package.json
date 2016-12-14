@@ -1,7 +1,7 @@
 {
   "name": "SakuraIoTOutgoingWebhookListener",
   "version": "1.0.0",
-  "description": "",
+  "description": "A project to listen webhook from sakura IoT platform.",
   "main": "app.js",
   "scripts": {
     "start": "node app"
