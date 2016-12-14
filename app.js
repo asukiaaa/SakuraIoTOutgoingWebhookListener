@@ -5,12 +5,15 @@ const request = require('request')
 
 const app = express()
 
+const thingSpeakApiKey = process.env.thingSpeakApiKey || null
+const port = process.env.PORT || 3000
+const host = process.env.HOST || '0.0.0.0'
 let channelsHistory = []
 
 app.set('view engine', 'pug')
 app.enable('view cache')
 
-app.listen(process.env.PORT || 3000, process.env.HOST || '0.0.0.0')
+app.listen(port, host)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -36,9 +39,7 @@ app.post('/sakura_outgoing', bodyParser.json(), (req, res) => {
   }
 })
 
-
 const postToThingSpeak = (channels) => {
-  const thingSpeakApiKey = process.env.thingSpeakApiKey || null
   if (thingSpeakApiKey == null) { return }
 
   let jsonToPost = {api_key: thingSpeakApiKey}
