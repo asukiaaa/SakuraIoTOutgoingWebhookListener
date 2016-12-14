@@ -39,24 +39,21 @@ app.post('/sakura_outgoing', bodyParser.json(), (req, res) => {
 
 const postToThingSpeak = (channels) => {
   const thingSpeakApiKey = process.env.thingSpeakApiKey || null
-  if (thingSpeakApiKey == null) {
-    return
+  if (thingSpeakApiKey == null) { return }
+
+  let jsonToPost = {api_key: thingSpeakApiKey}
+  for (let i = 0; i <= 8; i++) {
+    let channelValue = valueFromChannels(channels, i)
+    if (channelValue) {
+      jsonToPost["field" + i] = channelValue
+    }
   }
-  const panelVolt = valueFromChannels(channels, 0)
-  const chargeAmp = valueFromChannels(channels, 1)
-  const batteryVolt = valueFromChannels(channels, 2)
-  const chargeWatt = valueFromChannels(channels, 3)
 
   let requestOptions = {
     method: 'post',
     url: 'https://api.thingspeak.com/update.json',
-    json: {
-      api_key: thingSpeakApiKey,
-      field1: panelVolt,
-      field2: chargeAmp,
-      field3: batteryVolt,
-      field4: chargeWatt
-    }}
+    json: jsonToPost
+  }
 
   request(requestOptions, (err, response, body) => {
     if (err) {
