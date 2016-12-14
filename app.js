@@ -41,6 +41,7 @@ app.post('/sakura_outgoing', bodyParser.json(), (req, res) => {
 
 const postToThingSpeak = (channels) => {
   if (thingSpeakApiKey == null) { return }
+  console.log('post to ThingSpeak')
 
   let jsonToPost = {api_key: thingSpeakApiKey}
   for (let i = 0; i <= 8; i++) {
