@@ -5,7 +5,7 @@ const request = require('request')
 
 const app = express()
 
-const thingSpeakApiKey = process.env.thingSpeakApiKey || null
+const thingSpeakApiKey = process.env.ThingSpeakApiKey || null
 const port = process.env.PORT || 3000
 const host = process.env.HOST || '0.0.0.0'
 let channelsHistory = []
