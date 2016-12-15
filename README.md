@@ -1,4 +1,4 @@
-# SakuraOutgointWebhookListener
+# SakuraOutgoingWebhookListener
 An nodejs project for heroku to listen outgoing webhook from sakuraIoT platform.
 
 # Deploy to Heroku
