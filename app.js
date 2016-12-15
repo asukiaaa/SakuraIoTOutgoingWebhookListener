@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   res.render('index', {channelsHistory})
 })
 
-app.post('/sakura_outgoing', bodyParser.json(), (req, res) => {
+app.post('/', bodyParser.json(), (req, res) => {
   if (req.body.payload &&
       req.body.payload.channels) {
     const channels = req.body.payload.channels
