@@ -1,0 +1,6 @@
+{
+  "name": "Sakura IoT webhook listener",
+  "description": "A nodejs app to receive json posting from sakura IoT platform",
+  "repository": "https://github.com/asukiaaa/SakuraIoTOutgoingWebhookListener",
+  "keywords": ["node", "express", "SakuraIoT"]
+}
