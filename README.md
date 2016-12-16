@@ -4,6 +4,10 @@ An nodejs project for heroku to listen outgoing webhook from sakuraIoT platform.
 # Deploy to Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+# Config Vars
+## ThingSpeakApiKey
+You can send channels values to Thing Speak if you set thing speak write API Key as ThingSpeakApiKey of config vars for Heroku app.
+
 # Test
 You can test webhook posting with using curl command.
 
@@ -16,3 +20,8 @@ curl [your-app-url] \
 
 # License
 MIT
+
+# References
+- [SakuraIoTPlatform](https://iot.sakura.ad.jp/developer/)
+- [Heroku](https://www.heroku.com)
+- [ThingSpeak](https://thingspeak.com)
